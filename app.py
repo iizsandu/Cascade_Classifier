@@ -5,7 +5,7 @@ from PIL import Image
 
 class ObjectDetection:
     def __init__(self):
-        self.cascade_path = "haarcascades/stop_data.xml"
+        self.cascade_path = "stop_data.xml"
         self.cascade = cv2.CascadeClassifier(self.cascade_path)
     
     def detect_objects(self, image):
