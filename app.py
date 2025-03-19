@@ -15,7 +15,7 @@ class ObjectDetection:
         for (x, y, w, h) in objects:
             cv2.rectangle(image, (x,y), (x+w, y+h),(255,0,0),2)
         
-        return image
+        return image, len(objects)
     
 class ObjectDetectionApp:
     def __init__(self):
@@ -31,10 +31,11 @@ class ObjectDetectionApp:
             image = Image.open(uploaded_file)
             image_arr = np.array(image) #Converting PIL Image object to numpy array 
 
-            result_image = self.detector.detect_objects(image_arr)
+            result_image, box_count = self.detector.detect_objects(image_arr)
 
             st.image(image, caption="Uploaded Image", use_container_width = True)
             
+            st.write(f"Detected Objects: {box_count}")
             result_pil = Image.fromarray(result_image)
             st.image(result_pil, caption="Processed Image", use_container_width=True)
 
